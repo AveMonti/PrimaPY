@@ -78,6 +78,13 @@ class Graph:    #Graf zbiór wierzchołków wierzchołków
         return self.previous
 
 
+def shortest(v, path):              #TO DO
+    ''' make shortest path from v.previous'''
+    if v.previous:
+        path.append(v.previous.get_id())
+        shortest(v.previous, path)
+    return
+
 import heapq
 """ Algorytm kolejki sterty (kolejka priorytetowa a.k.a.).
 Sterty są tablicami, dla których a [k] <= a [2 * k + 1] i a [k] <= a [2 * k + 2] dla
@@ -163,3 +170,8 @@ if __name__ == '__main__':
 
     dijkstra(g, g.get_vertex('a'))
 
+    for t in ['d', 'e', 'f']:
+        target = g.get_vertex(t)
+        path = [t]
+        shortest(target, path)
+        print('The shortest path for %s : %s' % (t, path[::-1]))
